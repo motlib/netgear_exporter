@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+lxml = "*"
+pydantic = "*"
+pydantic-settings = "*"
+pytest = "*"
+requests = "*"
+uvicorn = "*"
+
+[dev-packages]
+black = "*"
+isort = "*"
+lxml-stubs = "*"
+mypy = "*"
+pylint = "*"
+pytest = "*"
+pytest-coverage = "*"
+types-requests = "*"
+
+[requires]
+python_version = "3.12"

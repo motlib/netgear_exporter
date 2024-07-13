@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Python Debugger - fastapi",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "netgear_exporter",
+            "args": []
+        }
+    ]
+}
