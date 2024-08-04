@@ -1,0 +1,10 @@
+{
+    "shellcheck.customArgs": [
+        "--external-sources"
+    ],
+    "python.testing.pytestArgs": [
+        "netgear_exporter"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

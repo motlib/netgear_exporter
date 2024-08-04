@@ -1,0 +1,28 @@
+name: QA
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pipenv
+        run: python -m pip install --upgrade pipenv
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Install Python packages
+        run: pipenv sync --dev
+
+      - name: Run QA scripts
+        run: ./scripts/qa.sh
+
+      - name: Test Docker Build
+        run: ./scripts/docker-build.sh

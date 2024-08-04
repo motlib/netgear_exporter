@@ -1,0 +1,3 @@
+"""Metadata information"""
+
+VERSION = "develop"
