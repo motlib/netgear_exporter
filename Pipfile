@@ -11,6 +11,7 @@ pydantic-settings = "*"
 pytest = "*"
 requests = "*"
 uvicorn = "*"
+cachetools = "*"
 
 [dev-packages]
 black = "*"
@@ -20,6 +21,7 @@ mypy = "*"
 pylint = "*"
 pytest = "*"
 pytest-coverage = "*"
+types-cachetools = "*"
 types-requests = "*"
 
 [requires]
