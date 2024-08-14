@@ -1,12 +1,15 @@
 # Netgear Exporter
 
+License: [MIT](./LICENSE.md)
+
 A [Prometheus](https://prometheus.io) exporter for the Netgear GS108Ev3 managed
 switch. This switch does not have any documented API / automation interface
 (apart from NSDP), so this exporter retrieves the HTML pages from the switch UI
 and parses them to extract switch information and port status and statistics and
 publishes them in Prometheus format.
 
-License: [MIT](./LICENSE.md)
+Here you can find an example of the generated metrics output:
+[metrics example](./docs/metrics_example.txt).
 
 ## Usage
 
@@ -34,7 +37,31 @@ This URL follows the Prometheus
 [multi-target exporter](https://prometheus.io/docs/guides/multi-target-exporter/)
 pattern.
 
-## Metrics
+## Prometheus Configuration
 
-Here you can find an example of the generated metrics output:
-[metrics example](./docs/metrics_example.txt).
+This is a simple configuration snippet for the Prometheus configuration (usually
+ `prometheus.yml`):
+
+```yaml
+scrape_configs:
+  - job_name: netgear
+    scrape_interval: 60s
+    metrics_path: /probe
+    static_configs:
+      - targets:
+        # This is the list of switch IP addresses to monitor.
+        - '192.168.0.239'
+    params:
+      # The auth module (i.e. password) configured to connect to the switches
+      # listed above.
+      auth_module: [default]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        # The netgear exporter's hostname:port
+        replacement: npi3:8177
+```
+
