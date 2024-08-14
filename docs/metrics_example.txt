@@ -1,0 +1,73 @@
+# HELP netgear_up Switch is reachable
+# TYPE netgear_up gauge
+netgear_up{address="192.168.0.239"} 1
+
+# HELP netgear_info Switch info
+# TYPE netgear_info gauge
+netgear_info{address="192.168.0.239",dhcp="1",firmware="V2.06.16EN",gateway="192.168.0.254",ip="192.168.0.239",mac="A0:40:A0:7D:CA:FE",name="sw1",netmask="255.255.255.0",product="GS108Ev3",sn="3V01234567890"} 1
+
+# HELP netgear_rx_bytes_total Number of bytes received on port
+# TYPE netgear_rx_bytes_total counter
+netgear_rx_bytes_total{address="192.168.0.239",port="1"} 1310025108796
+netgear_rx_bytes_total{address="192.168.0.239",port="2"} 0
+netgear_rx_bytes_total{address="192.168.0.239",port="3"} 0
+netgear_rx_bytes_total{address="192.168.0.239",port="4"} 101751310
+netgear_rx_bytes_total{address="192.168.0.239",port="5"} 130041036
+netgear_rx_bytes_total{address="192.168.0.239",port="6"} 155055440220
+netgear_rx_bytes_total{address="192.168.0.239",port="7"} 60221618000
+netgear_rx_bytes_total{address="192.168.0.239",port="8"} 43103680025
+
+# HELP netgear_tx_bytes_total Number of bytes transmitted on port
+# TYPE netgear_tx_bytes_total counter
+netgear_tx_bytes_total{address="192.168.0.239",port="1"} 185726698236
+netgear_tx_bytes_total{address="192.168.0.239",port="2"} 0
+netgear_tx_bytes_total{address="192.168.0.239",port="3"} 0
+netgear_tx_bytes_total{address="192.168.0.239",port="4"} 7081049726
+netgear_tx_bytes_total{address="192.168.0.239",port="5"} 7146529690
+netgear_tx_bytes_total{address="192.168.0.239",port="6"} 313776160512
+netgear_tx_bytes_total{address="192.168.0.239",port="7"} 1028818808802
+netgear_tx_bytes_total{address="192.168.0.239",port="8"} 51054234322
+
+# HELP netgear_crc_err_total Number of CRC errors
+# TYPE netgear_crc_err_total counter
+netgear_crc_err_total{address="192.168.0.239",port="1"} 0
+netgear_crc_err_total{address="192.168.0.239",port="2"} 0
+netgear_crc_err_total{address="192.168.0.239",port="3"} 0
+netgear_crc_err_total{address="192.168.0.239",port="4"} 0
+netgear_crc_err_total{address="192.168.0.239",port="5"} 0
+netgear_crc_err_total{address="192.168.0.239",port="6"} 0
+netgear_crc_err_total{address="192.168.0.239",port="7"} 0
+netgear_crc_err_total{address="192.168.0.239",port="8"} 0
+
+# HELP netgear_port_up Switch port is connected
+# TYPE netgear_port_up gauge
+netgear_port_up{address="192.168.0.239",port="1"} 1
+netgear_port_up{address="192.168.0.239",port="2"} 0
+netgear_port_up{address="192.168.0.239",port="3"} 0
+netgear_port_up{address="192.168.0.239",port="4"} 1
+netgear_port_up{address="192.168.0.239",port="5"} 1
+netgear_port_up{address="192.168.0.239",port="6"} 1
+netgear_port_up{address="192.168.0.239",port="7"} 1
+netgear_port_up{address="192.168.0.239",port="8"} 1
+
+# HELP netgear_speed Connection speed in MBit
+# TYPE netgear_speed gauge
+netgear_speed{address="192.168.0.239",port="1"} 1000
+netgear_speed{address="192.168.0.239",port="2"} 0
+netgear_speed{address="192.168.0.239",port="3"} 0
+netgear_speed{address="192.168.0.239",port="4"} 100
+netgear_speed{address="192.168.0.239",port="5"} 10
+netgear_speed{address="192.168.0.239",port="6"} 1000
+netgear_speed{address="192.168.0.239",port="7"} 1000
+netgear_speed{address="192.168.0.239",port="8"} 1000
+
+# HELP netgear_flow_control Port flow control enabled or disabled
+# TYPE netgear_flow_control gauge
+netgear_flow_control{address="192.168.0.239",port="1"} 0
+netgear_flow_control{address="192.168.0.239",port="2"} 0
+netgear_flow_control{address="192.168.0.239",port="3"} 0
+netgear_flow_control{address="192.168.0.239",port="4"} 0
+netgear_flow_control{address="192.168.0.239",port="5"} 0
+netgear_flow_control{address="192.168.0.239",port="6"} 0
+netgear_flow_control{address="192.168.0.239",port="7"} 0
+netgear_flow_control{address="192.168.0.239",port="8"} 0

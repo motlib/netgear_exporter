@@ -26,6 +26,18 @@ class Metric:
         self._data: dict[str, "MetricInstance"] = {}
         self._with_update_counter = with_update_counter
 
+    def clone(self) -> "Metric":
+        """Clone this instance, i.e. duplicate the metric definition, but not
+        its instances"""
+
+        return Metric(
+            name=self._name,
+            datatype=self._datatype,
+            helpstr=self._helpstr,
+            timeout=self._timeout,
+            with_update_counter=self._with_update_counter,
+        )
+
     @property
     def name(self) -> str:
         """Return the metric name"""
@@ -137,6 +149,8 @@ class Metric:
         yield f"# TYPE {self.name} {self.datatype.value}"
 
         yield from (str(instance) for instance in self._data.values())
+
+        yield ""  # empty line for better readability
 
     def render(self) -> str:
         """Render the metric to Prometheus format"""

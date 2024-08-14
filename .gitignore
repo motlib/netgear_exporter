@@ -3,3 +3,6 @@
 .coverage
 build
 .env
+.venv
+.pytest_cache
+.mypy_cache

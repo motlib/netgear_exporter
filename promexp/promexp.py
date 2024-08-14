@@ -20,6 +20,20 @@ class PrometheusExporter:
         self._lock = Lock()
         self._hide_empty_metrics = hide_empty_metrics
 
+    def clone(self) -> "PrometheusExporter":
+        """Clone this metric exporter with its metric definitions, but do not
+        clone the metrics instances"""
+
+        new_inst = PrometheusExporter(hide_empty_metrics=self._hide_empty_metrics)
+
+        with self._lock:
+            for name, metric in self._prom.items():
+                new_inst._prom[name] = (  # pylint: disable=protected-access
+                    metric.clone()
+                )
+
+        return new_inst
+
     def register(
         self,
         name: str,

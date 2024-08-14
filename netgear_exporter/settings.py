@@ -1,17 +1,7 @@
 """Exporter settings"""
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-class SwitchConfig(BaseModel):
-    """Settings for a single switch"""
-
-    address: str = Field(
-        default="192.168.0.239", description="Address of the switch to monitor"
-    )
-
-    password: str = Field(default="", description="Password to connect to the switch")
 
 
 class NetgearExporterSettings(BaseSettings):
@@ -28,7 +18,17 @@ class NetgearExporterSettings(BaseSettings):
         description="Set to true for online reloading of source code changes",
     )
 
-    switches: list[SwitchConfig] = Field(default_factory=list)
+    cache_size: int = Field(
+        default=32,
+        description="Size of the cache of netgear connectors remembered for the /probe API.",
+    )
+
+    cache_ttl: int = Field(
+        default=15 * 60,
+        description="Time to life of the cached connectors for the /probe API.",
+    )
+
+    auth_modules: dict[str, str] = Field(default_factory=dict)
 
     model_config = SettingsConfigDict(
         env_prefix="netgear_exporter_", cli_parse_args=True
