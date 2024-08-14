@@ -17,11 +17,16 @@ from .settings import settings
 logger = logging.getLogger(__name__)
 
 
-connectors: list[NetgearConnector] = []
-
-
 @cached(cache=TTLCache(maxsize=settings.cache_size, ttl=settings.cache_ttl))
 def _get_connector(address: str, password: str) -> NetgearConnector:
+    """Helper function to return a new netgear connector for the given address.
+
+    This function has a cache decorator with a configured TTL, so that for the
+    same address the same connector is returned and an already existing HTTP
+    login session is reused. Otherwise the switch kicks you out if you attempt
+    too many login attempts (even if successful) in a limited time.
+    """
+
     return NetgearConnector(address, password)
 
 
@@ -31,12 +36,17 @@ api = FastAPI()
 def _update_metrics_from_connector(
     pexp: PrometheusExporter, connector: NetgearConnector
 ) -> None:
+    """Update the given prometheus exporter with new metric values.
+
+    Note: We do not set the 'address' label manually to the switch IP address,
+    as this is automatically done as 'instance' by Prometheus when using the
+    multi-target pattern."""
+
     try:
         si = connector.get_switch_info()
         pis = connector.get_port_info()
 
         labels: dict[str, str] = {}
-        labels["address"] = connector.address
         labels["dhcp"] = str(int(si.dhcp))
         labels["gateway"] = si.gateway_address
         labels["netmask"] = si.subnet_mask
@@ -49,7 +59,7 @@ def _update_metrics_from_connector(
 
         pexp.set("netgear_info", labels=labels, value=1)
 
-        pexp.set("netgear_up", labels={"address": connector.address}, value=1)
+        pexp.set("netgear_up", labels={}, value=1)
     except Exception as ex:  # pylint:disable=broad-exception-caught
         pexp.set("netgear_up", labels={"address": connector.address}, value=0)
         logger.error(
@@ -77,7 +87,7 @@ def _update_metrics_from_connector(
 
         pexp.set_all(
             name_vals=name_vals,
-            labels={"address": connector.address, "port": str(pi.port_no)},
+            labels={"port": str(pi.port_no)},
         )
 
     return
