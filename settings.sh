@@ -4,7 +4,7 @@ MODULES="promexp netgear_exporter"
 
 METADATA_FILE=netgear_exporter/metadata.py
 
-DOCKER_NAME="netgear_exporter"
+DOCKER_NAME="motlib/netgear_exporter"
 
 DOCKER_PUBLISH="-p 8000:8000"
 
