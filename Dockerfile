@@ -1,38 +1,23 @@
 FROM python:3.12-slim
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 WORKDIR /app
 
-#RUN apt-get update \
-#    && BUILD_DEPS="" \
-#    && apt-get install -y ${BUILD_DEPS} \
-#    && pip install --upgrade pip pipenv
-
-RUN pip install --upgrade pip pipenv
+RUN pip install --no-cache-dir --upgrade pip pipenv \
+    && adduser --home /app --no-create-home --uid 4242 appuser
 
 ADD Pipfile Pipfile.lock /app/
 
-RUN pipenv install --system
+RUN pipenv install --deploy --extra-pip-args "--no-cache-dir" --system
 
-# Create a group and user to run the app
-#ARG APP_USER=appuser
-#RUN mkdir -p /app /app/data \
-#        && adduser --home /app --no-create-home --uid 4242 ${APP_USER}
-RUN adduser --home /app --no-create-home --uid 4242 appuser
-
-# Install packages needed to run the application
-#RUN apt-get update \
-#    && RUN_DEPS="" \
-#    && apt-get install -y ${RUN_DEPS} \
-#    && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
 ADD . /app/
-#COPY --from=buildenv /app/.venv /app/.venv
 
 # API will listen on this port
-EXPOSE 8000
+EXPOSE 8177
 
 USER appuser
 
 # Start API server
-CMD ["python", "-m", "netgear_exporter"]
+ENTRYPOINT ["python", "-m", "netgear_exporter"]
