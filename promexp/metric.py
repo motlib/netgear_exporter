@@ -150,6 +150,8 @@ class Metric:
 
         yield from (str(instance) for instance in self._data.values())
 
+        yield ""  # empty line for better readability
+
     def render(self) -> str:
         """Render the metric to Prometheus format"""
 
