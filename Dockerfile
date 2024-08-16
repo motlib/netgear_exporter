@@ -1,12 +1,12 @@
-FROM python:3.12-slim
+FROM python:3.12-alpine
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
 RUN pip install --no-cache-dir --upgrade pip pipenv \
-    && adduser --home /app --no-create-home --uid 4242 appuser
+    && adduser -h /app -H -u 4242 -D appuser
 
 ADD Pipfile Pipfile.lock /app/
 
