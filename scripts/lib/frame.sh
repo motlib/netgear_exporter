@@ -17,7 +17,7 @@ fi
 function in_venv {
     ARGS=$*
     if ! grep '.venv' "$(which python)" > /dev/null; then
-        PREFIX="pipenv run "
+        PREFIX="poetry run "
     fi
 
     ${PREFIX} ${ARGS}

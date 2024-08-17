@@ -4,7 +4,11 @@ source "$(dirname "$0")/lib/frame.sh"
 
 "${BASE_DIR}/set-version.sh"
 
-docker build --progress plain --pull --tag "${DOCKER_NAME}:latest" .
+DOCKER_BUILD_OPTS="${DOCKER_BUILD_OPTS} \
+    --progress plain \
+    --pull"
 
-# Restore 'develop' version
-"${BASE_DIR}/set-version.sh" develop
+docker build \
+    ${DOCKER_BUILD_OPTS} \
+    --tag "${DOCKER_NAME}:latest" \
+    .

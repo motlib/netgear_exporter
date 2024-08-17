@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "netgear-exporter"
+version = "0.2.1.dev+9c46f90"
+description = "A Prometheus exporter for Netgear GS108Ev3 managed switches"
+authors = ["Andreas Schroeder <andreas@a-netz.de>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "*"
+lxml = "*"
+pydantic = "*"
+pydantic-settings = "*"
+pytest = "*"
+requests = "*"
+uvicorn = "*"
+cachetools = "*"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+isort = "*"
+lxml-stubs = "*"
+mypy = "*"
+pylint = "*"
+pytest = "*"
+pytest-coverage = "*"
+types-cachetools = "*"
+types-requests = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
