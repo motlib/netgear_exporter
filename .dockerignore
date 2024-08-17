@@ -1,5 +1,6 @@
 *
+**/__pycache__
 !netgear_exporter
 !promexp
-!Pipfile*
-**/__pycache__
+!pyproject.toml
+!poetry.lock
